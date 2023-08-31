@@ -16,12 +16,14 @@ export default function Login({
   const { setUserProfile, setUserTokens } = useUserAuthContext()
 
   const tokenAndUserInfoAPIReq = async (code: string) => {
-    const tokenRequest = await fetch('/api/getUserToken', {
+    const tokenRequest = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/getUserToken`, {
       method: 'POST',
       body: JSON.stringify({ code: code }),
     })
 
     const token = await tokenRequest.json()
+
+    console.log(token)
 
     if ('error' in token) {
       alert('Need to sign in...')
@@ -45,7 +47,7 @@ export default function Login({
       setUserTokens(userTokenFromApi)
 
       if (token && token.access_token) {
-        const userInfoRequest = await fetch('/api/getUserInfo', {
+        const userInfoRequest = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/getUserInfo`, {
           method: 'POST',
           body: JSON.stringify({ access_token: token.access_token }),
         })
@@ -65,6 +67,7 @@ export default function Login({
     const code = searchParams?.code
 
     if (code) {
+      console.log(code)
       tokenAndUserInfoAPIReq(String(code))
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
