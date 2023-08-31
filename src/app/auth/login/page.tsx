@@ -1,17 +1,15 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
 import { UserProfile, UserTokens, useUserAuthContext } from '@/contexts/UserAuth'
 
-export default function Login({
-  params,
-  searchParams,
-}: {
-  params: { slug: string }
-  searchParams?: { [key: string]: string | string[] | undefined }
-}) {
+export const runtime = 'edge'
+
+export default function Login() {
   const router = useRouter()
+
+  const searchParams = useSearchParams()
 
   const { setUserProfile, setUserTokens } = useUserAuthContext()
 
@@ -64,8 +62,8 @@ export default function Login({
   }
 
   useEffect(() => {
-    const code = searchParams?.code
-    console.log(searchParams)
+    const code = searchParams.get('code')
+    console.log(code)
 
     if (code) {
       tokenAndUserInfoAPIReq(String(code))
