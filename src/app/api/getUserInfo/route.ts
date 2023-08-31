@@ -1,8 +1,6 @@
 import { UserProfile } from '@/contexts/UserAuth'
 import { NextRequest, NextResponse } from 'next/server'
 
-export const runtime = 'edge'
-
 export async function POST(req: NextRequest) {
   const access_token: string = (await req.json()).access_token as string
 
