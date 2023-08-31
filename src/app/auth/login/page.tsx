@@ -65,7 +65,7 @@ export default function Login({
 
   useEffect(() => {
     const code = searchParams?.code
-    console.log(code)
+    console.log(searchParams)
 
     if (code) {
       tokenAndUserInfoAPIReq(String(code))
