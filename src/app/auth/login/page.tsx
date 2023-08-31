@@ -65,9 +65,9 @@ export default function Login({
 
   useEffect(() => {
     const code = searchParams?.code
+    console.log(code)
 
     if (code) {
-      console.log(code)
       tokenAndUserInfoAPIReq(String(code))
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
