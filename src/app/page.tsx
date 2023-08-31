@@ -50,10 +50,10 @@ export default function Component() {
   }, [userProfile, userTokens])
 
   const handleSignIn = () => {
-    const loginSessionURL = `${String(process.env.COGNITO_DOMAIN)}/oauth2/authorize`
+    const loginSessionURL = `${String(process.env.NEXT_PUBLIC_COGNITO_DOMAIN)}/oauth2/authorize`
     const loginSessionParams = new URLSearchParams({
       redirect_uri: `${String(process.env.NEXT_PUBLIC_BASE_URL)}/auth/login`,
-      client_id: String(process.env.COGNITO_APP_CLIENT_ID),
+      client_id: String(process.env.NEXT_PUBLIC_COGNITO_APP_CLIENT_ID),
       response_type: 'code',
       scope: 'email openid phone profile',
     })
@@ -163,11 +163,11 @@ export default function Component() {
                                 active ? 'bg-red-500 text-white' : 'text-gray-900'
                               } group flex justify-between w-full items-center rounded-md px-2 py-2 text-sm`}
                               onClick={async () => {
-                                const endSessionURL = `${String(process.env.COGNITO_DOMAIN)}/logout`
+                                const endSessionURL = `${String(process.env.NEXT_PUBLIC_COGNITO_DOMAIN)}/logout`
 
                                 const endSessionParams = new URLSearchParams({
                                   redirect_uri: `${String(process.env.NEXT_PUBLIC_BASE_URL)}/auth/login`,
-                                  client_id: String(process.env.COGNITO_APP_CLIENT_ID),
+                                  client_id: String(process.env.NEXT_PUBLIC_COGNITO_APP_CLIENT_ID),
                                   response_type: 'code',
                                 })
                                 window.open(`${endSessionURL}?${endSessionParams}`, '_self')
